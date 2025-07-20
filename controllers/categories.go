@@ -94,7 +94,7 @@ func GetCategoryByID(db *sql.DB) gin.HandlerFunc {
 		err = db.QueryRow(sqlStatement, id).Scan(&category.ID, &category.Name, &category.CreatedAt, &category.CreatedBy, &category.ModifiedAt, &category.CreatedBy)
 		if err != nil {
 			if err == sql.ErrNoRows {
-				ctx.JSON(http.StatusNotFound, gin.H{"error": "Category not found"})
+				ctx.JSON(http.StatusNotFound, gin.H{"error": "The category you search does not exist"})
 				return
 			}
 			ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})

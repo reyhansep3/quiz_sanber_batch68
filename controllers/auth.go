@@ -13,7 +13,7 @@ func Auth(db *sql.DB) gin.HandlerFunc {
 		name, pss, ok := ctx.Request.BasicAuth()
 		if !ok {
 			ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
-				"error": "Username dan Password kosong",
+				"error": "Username dan Password empty",
 			})
 			return
 		}
@@ -29,7 +29,7 @@ func Auth(db *sql.DB) gin.HandlerFunc {
 				`, name, pss, now, name, now, name)
 				if err != nil {
 					ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
-						"error": "Gagal menyimpan user",
+						"error": "Error to save users",
 					})
 					return
 				}

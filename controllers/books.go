@@ -72,7 +72,7 @@ func PostBooks(db *sql.DB) gin.HandlerFunc {
 		).Scan(&newBook.ID, &newBook.CreatedAt)
 
 		if err != nil {
-			fmt.Println("Error inserting book:", err)
+			fmt.Println("Error inserting a book:", err)
 			ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 				"error": err.Error(),
 			})
@@ -133,7 +133,7 @@ func GetBooksByID(db *sql.DB) gin.HandlerFunc {
 		err = db.QueryRow(sqlStatement, id).Scan(&book.ID, &book.Title, &book.Description, &book.ImageURL, &book.ReleaseYear, &book.Price, &book.TotalPage, &book.Thickness, &book.CategoryID, &book.CreatedAt, &book.CreatedBy, &book.ModifiedAt, &book.ModifiedBy)
 		if err != nil {
 			if err == sql.ErrNoRows {
-				ctx.JSON(http.StatusNotFound, gin.H{"error": "Book not found"})
+				ctx.JSON(http.StatusNotFound, gin.H{"error": "the book you search does not exist"})
 				return
 			}
 			ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})

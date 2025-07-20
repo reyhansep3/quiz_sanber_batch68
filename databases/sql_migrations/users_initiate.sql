@@ -3,7 +3,7 @@
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(100) NOT NULL UNIQUE,
+    username VARCHAR(256) NOT NULL UNIQUE,
     password VARCHAR(256) NOT NULL,
     created_at TIMESTAMP,
     created_by VARCHAR(100),
